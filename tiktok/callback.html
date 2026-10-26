@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KeyCuts – TikTok</title>
+<style>body{font-family:system-ui,sans-serif;background:#111;color:#eee;max-width:640px;margin:60px auto;padding:0 16px}code{background:#222;padding:6px 8px;border-radius:6px;word-break:break-all;display:block;margin:12px 0}</style>
+</head><body>
+<h2>KeyCuts Publisher</h2>
+<p id="msg">Enviando la autorización a KeyCuts en esta computadora…</p>
+<div id="fallback" hidden><p>Si no se completó solo, copia este código en la ventana de KeyCuts:</p><code id="code"></code></div>
+<script>
+var q = location.search;
+var p = new URLSearchParams(q);
+if (p.get("code")) {
+  document.getElementById("code").textContent = p.get("code");
+  setTimeout(function(){ document.getElementById("fallback").hidden = false; }, 4000);
+  location.replace("http://127.0.0.1:8765/callback" + q);
+} else {
+  document.getElementById("msg").textContent = "TikTok no envió autorización: " + (p.get("error_description") || p.get("error") || "sin datos") + ".";
+}
+</script>
+</body></html>
